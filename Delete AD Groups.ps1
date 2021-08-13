@@ -15,15 +15,15 @@ $groupdetails1 = $null
 $groupdetails1 = Get-ADGroup $group -ErrorAction SilentlyContinue
 if ($groupdetails1){
 (Get-Date -UFormat '%Y-%m-%d %T ') + "$count) $group group could not be deleted." | Out-File $outputfile -Append
-Write-Host (Get-Date -UFormat '%Y-%m-%d %T ') + "$count) $group group could not be deleted." -ForegroundColor Yellow
+Write-Host (Get-Date -UFormat '%Y-%m-%d %T ') "$count) $group group could not be deleted." -ForegroundColor Yellow
 }
 else{
 (Get-Date -UFormat '%Y-%m-%d %T ') + "$count) $group group deleted successfully." | Out-File $outputfile -Append
-Write-Host (Get-Date -UFormat '%Y-%m-%d %T ') + "$count) $group group deleted successfully." -ForegroundColor Green
+Write-Host (Get-Date -UFormat '%Y-%m-%d %T ') "$count) $group group deleted successfully." -ForegroundColor Green
 }
 }
 else {
 (Get-Date -UFormat '%Y-%m-%d %T ') + "$count) $group group not found in AD." | Out-File $outputfile -Append
-Write-Host (Get-Date -UFormat '%Y-%m-%d %T ') + "$count) $group group not found in AD." -ForegroundColor Red
+Write-Host (Get-Date -UFormat '%Y-%m-%d %T ') "$count) $group group not found in AD." -ForegroundColor Red
 }
 }
