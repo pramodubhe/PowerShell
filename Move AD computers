@@ -1,0 +1,35 @@
+<#
+sample input file -
+
+________________________________________
+name;ou
+adobjectname1;targetouCN
+adobjectname2;targetouCN
+adobjectname3;targetouCN
+________________________________________
+
+#>
+
+Import-Module ActiveDirectory
+
+$inputfile = "C:\temp\input.txt"
+$outputfile = "C:\temp\output.txt"
+
+$csv = Import-Csv $inputfile -Delimiter ";"
+$count = 0
+
+foreach ($row in $csv){
+$count++
+
+try {
+Get-ADComputer $row.name | Move-ADObject -TargetPath $row.ou
+"$($row.name);moved to $($row.ou)" | Out-File $outputfile -Append 
+Write-Host "$count) $($row.name) processed." -ForegroundColor Green
+}  
+catch {
+"$($row.name);could not be moved" | Out-File $outputfile -Append 
+Write-Host "$count) $($row.name) could not be processed." -ForegroundColor Red
+
+}
+
+}
