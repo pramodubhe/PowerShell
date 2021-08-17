@@ -1,0 +1,8 @@
+$Phrase = "This is a text to speech code, replace this content to hear it."
+
+Add-Type -AssemblyName System.speech
+$texttospeech = New-Object System.Speech.Synthesis.SpeechSynthesizer
+
+
+$texttospeech.Rate   = 0  # -10 is slowest, 10 is fastest
+$texttospeech.Speak($Phrase)
