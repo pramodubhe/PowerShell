@@ -1,0 +1,42 @@
+Function Service-Status {
+#function name
+
+    #if you want to print/write something before script execution  	
+    Begin {}
+    
+    #actual script
+    Process {
+    
+
+#What should PS do if any error occurs        
+$ErrorActionPreference = "SilentlyContinue"
+
+
+#command that needs to be executed on each computer
+$Result = Get-Service -Name BITS -ComputerName $_
+
+    
+#define object and it's custom members
+$obj = New-Object psobject
+$obj | Add-Member NoteProperty Computer $_
+$obj | Add-Member NoteProperty ServiceName ($Result.Name)
+$obj | Add-Member NoteProperty ServiceStatus ($Result.Status)
+
+#set the result code
+if ($Result.Status -eq 'Running') {
+$obj | Add-Member NoteProperty Working $True
+
+#if result is not matched, it will be considered as false
+} else {
+$obj | Add-Member NoteProperty Working $False
+}
+
+
+Write-Output $obj
+}
+    #if you want to print/write something after script execution
+    End {}
+    
+}
+
+Get-Content c:\Servers.txt | Service-Status
