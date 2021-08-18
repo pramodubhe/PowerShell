@@ -1,0 +1,16 @@
+$inputfile = "C:\Temp\Serverlist.txt"
+$outputfile = "C:\temp\test.txt"
+
+"Server Name" + "Device ID" + "Volume Name" | ft | Out-File $outputfile -Append
+
+$colComputers = get-content $inputfile
+foreach ($strComputer in $colComputers) 
+{ 
+$colDisks = get-wmiobject Win32_LogicalDisk -computername $strComputer -Filter “DriveType = 3"
+foreach ($objdisk in $colDisks) 
+{ 
+$DeviceID = $objdisk.DeviceID
+$VolumeName = $objdisk.VolumeName
+$strComputer + $DeviceID + $VolumeName | ft | Out-File $outputfile -Append
+}
+}
