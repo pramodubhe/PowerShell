@@ -3,7 +3,8 @@ Name:
 Password and API Key Detection Script with HTML Reporting
 
 Purpose:
-This PowerShell script scans files on a local machine, including specified directories, local drives, and OneDrive (if available), for patterns that may indicate sensitive data such as passwords or API keys. 
+This PowerShell script scans files on a local machine, including specified directories, local drives, and OneDrive (if available), for patterns that may indicate sensitive data such as passwords or API keys.
+Script to scan locally saved passwords.
 It generates an HTML report summarizing the findings, including details of matched files and the regex patterns used.
 
 Key Features:
